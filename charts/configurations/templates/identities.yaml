@@ -1,0 +1,23 @@
+{{- range $k, $v := .Values.application_identities }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: application
+  namespace: {{ $k }}
+  annotations:
+    azure.workload.identity/client-id: {{ $v.client_id }}
+  labels:
+    azure.workload.identity/use: "true"
+---
+{{- end }}
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: shared
+  namespace: shared-components
+  annotations:
+    azure.workload.identity/client-id: {{ .Values.shared_identity_client_id }}
+  labels:
+    azure.workload.identity/use: "true"
+---

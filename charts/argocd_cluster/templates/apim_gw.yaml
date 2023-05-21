@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apim-gw
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tkubica12/enterprise-container-platform
+    path: charts/apim_gw
+    targetRevision: main
+    helm:
+      releaseName: apim-gw
+      valueFiles:
+        - ../../clusters/{{ .Values.cluster_name }}/manifest.yaml
+        - ../../clusters/{{ .Values.cluster_name }}/runtime.yaml
+  destination:
+    server: https://kubernetes.default.svc 
+    namespace: shared-components
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

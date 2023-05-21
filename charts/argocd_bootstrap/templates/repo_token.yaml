@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-repo-token
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+stringData:
+  url: https://github.com/tkubica12/enterprise-container-platform
+  username: notused
+  password: {{ .Values.repo_token }}

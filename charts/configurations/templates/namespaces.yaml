@@ -1,0 +1,24 @@
+{{- range $k, $v := .Values.standard_applications }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $k }}
+  labels:
+    sas: {{ $k }}
+  annotations:
+    scheduler.alpha.kubernetes.io/node-selector: dedication=shared
+---
+{{- end }}
+
+{{- range $k, $v := .Values.confidential_applications }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $k }}
+  labels:
+    sas: {{ $k }}
+  annotations:
+    scheduler.alpha.kubernetes.io/node-selector: dedication={{ $k }}
+    scheduler.alpha.kubernetes.io/defaultTolerations: '[{"operator": "Equal", "effect": "NoSchedule", "key": "dedication", "value": "{{ $k }}"}]'
+---
+{{- end }}

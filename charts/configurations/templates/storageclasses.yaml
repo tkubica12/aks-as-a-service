@@ -1,0 +1,202 @@
+{{- range $k, $v := .Values.standard_applications }}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-standardhdd-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: Standard_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-standardssd-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: StandardSSD_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-standardssd-zrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: StandardSSD_ZRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premium-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: Premium_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premium-zrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: Premium_ZRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premiumv2-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: PremiumV2_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premiumv2-zrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: PremiumV2_ZRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+{{- end }}
+
+
+{{- range $k, $v := .Values.confidential_applications }}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-standardhdd-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: Standard_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-standardssd-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: StandardSSD_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-standardssd-zrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: StandardSSD_ZRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premium-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: Premium_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premium-zrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: Premium_ZRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premiumv2-lrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: PremiumV2_LRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ $k }}-azdisk-premiumv2-zrs
+provisioner: disk.csi.azure.com
+parameters:
+  skuname: PremiumV2_ZRS 
+  diskEncryptionSetID: /subscriptions/{{ $.Values.subscription_id }}/resourceGroups/{{ $.Values.resource_group_name }}/providers/Microsoft.Compute/diskEncryptionSets/{{ $k }}
+  cachingMode: ReadOnly
+  tags: a=v,b=v
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+{{- end }}

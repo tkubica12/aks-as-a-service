@@ -1,0 +1,35 @@
+{{- range $k, $v := .Values.ingress_types.nginx }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $k }}
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: {{ $v.version }}
+    helm:
+      releaseName: {{ $k }}
+      values: |
+        controller:
+          podLabels:
+            ingress_type: {{ $k }}
+          ingressClassResource:
+            enabled: true
+            name: {{ $k }}
+          service:
+            annotations:
+              service.beta.kubernetes.io/azure-load-balancer-internal: true
+              service.beta.kubernetes.io/azure-load-balancer-internal-subnet: {{ $v.subnet_name }}
+            type: LoadBalancer
+  destination:
+    server: https://kubernetes.default.svc 
+    namespace: shared-components
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+{{- end}}

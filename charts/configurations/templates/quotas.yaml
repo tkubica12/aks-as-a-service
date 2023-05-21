@@ -1,0 +1,64 @@
+{{- range $kouter, $vouter := .Values.standard_applications }}
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: {{ $kouter }}
+  namespace: {{ $kouter }}
+spec:
+  hard:
+    {{- range $k, $v := $.Values.standard_applications }}
+    {{ if ne $k $kouter }}
+    {{ $k }}-azdisk-standardhddd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ end }}
+    {{- end}}
+    {{- range $k, $v := $.Values.confidential_applications }}
+    {{ if ne $k $kouter }}
+    {{ $k }}-azdisk-standardhddd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ end }}
+    {{- end }}
+---
+{{- end}}
+{{- range $kouter, $vouter := .Values.confidential_applications }}
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: {{ $kouter }}
+  namespace: {{ $kouter }}
+spec:
+  hard:
+    {{- range $k, $v := $.Values.standard_applications }}
+    {{ if ne $k $kouter }}
+    {{ $k }}-azdisk-standardhddd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ end }}
+    {{- end}}
+    {{- range $k, $v := $.Values.confidential_applications }}
+    {{ if ne $k $kouter }}
+    {{ $k }}-azdisk-standardhddd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-standardssd-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premium-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-lrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ $k }}-azdisk-premiumv2-zrs.storageclass.storage.k8s.io/persistentvolumeclaims: 0
+    {{ end }}
+    {{- end }}
+---
+{{- end}}

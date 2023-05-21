@@ -1,0 +1,132 @@
+{{- range $k, $v := .Values.ingress_types.apim }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $k }}-env
+  labels:
+    app: {{ $k }}
+data:
+  config.service.endpoint: {{ $v.api_management_configuration_endpoint }}
+  neighborhood.host: "{{ $k }}-instance-discovery"
+  runtime.deployment.artifact.source: "Azure Portal"
+  runtime.deployment.mechanism: "YAML"
+  runtime.deployment.orchestrator.type: "Kubernetes"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $k }}
+  labels:
+    app: {{ $k }}
+    azure.workload.identity/use: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $k }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 25%
+  template:
+    metadata:
+      labels:
+        app: {{ $k }}
+        ingress_type: {{ $k }}
+    spec:
+      serviceAccountName: shared
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: {{ $k }}
+        image: mcr.microsoft.com/azure-api-management/gateway:v2
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8081
+          # Container port used for rate limiting to discover instances
+        - name: rate-limit-dc
+          protocol: UDP
+          containerPort: 4290
+          # Container port used for instances to send heartbeats to each other
+        - name: dc-heartbeat
+          protocol: UDP
+          containerPort: 4291
+        readinessProbe:
+          httpGet:
+            path: /status-0123456789abcdef
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+        - name: config.service.auth
+          valueFrom:
+            secretKeyRef:
+              name: {{ $k }}  
+              key: {{ $k }}  
+        envFrom:
+        - configMapRef:
+            name: {{ $k }}-env
+        volumeMounts:
+        - name: mysecretmount
+          mountPath: "/mnt/mysecretpath"
+          readOnly: true
+      volumes:
+        - name: mysecretmount
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: {{ $k }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $k }}-live-traffic
+  labels:
+    app: {{ $k }}
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    service.beta.kubernetes.io/azure-load-balancer-internal-subnet: {{ $v.subnet_name }}
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  - name: https
+    port: 443
+    targetPort: 8081
+  selector:
+    app: {{ $k }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $k }}-instance-discovery
+  labels:
+    app: {{ $k }}
+  annotations:
+    azure.apim.kubernetes.io/notes: "Headless service being used for instance discovery of self-hosted gateway"
+spec:
+  clusterIP: None
+  type: ClusterIP
+  ports:
+  - name: rate-limit-discovery
+    port: 4290
+    targetPort: rate-limit-dc
+    protocol: UDP
+  - name: discovery-heartbeat
+    port: 4291
+    targetPort: dc-heartbeat
+    protocol: UDP
+  selector:
+    app: {{ $k }}
+---
+{{- end }}
