@@ -1,82 +1,82 @@
 locals {
   # For specific policy loop applications, return set of images if any, than flatten results
-  standard_no_priv_containers_image_exclusions = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_priv_containers.image_exclusions if can(v.policy_exclusions.no_priv_containers.image_exclusions)])
+  standard_no_priv_containers_image_exclusions     = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_priv_containers.image_exclusions if can(v.policy_exclusions.no_priv_containers.image_exclusions)])
   confidential_no_priv_containers_image_exclusions = flatten([for k, v in var.confidential_applications : v.policy_exclusions.no_priv_containers.image_exclusions if can(v.policy_exclusions.no_priv_containers.image_exclusions)])
-  
-  standard_limit_volumes_image_exclusions = flatten([for k, v in var.standard_applications : v.policy_exclusions.limit_volumes.image_exclusions if can(v.policy_exclusions.limit_volumes.image_exclusions)])
+
+  standard_limit_volumes_image_exclusions     = flatten([for k, v in var.standard_applications : v.policy_exclusions.limit_volumes.image_exclusions if can(v.policy_exclusions.limit_volumes.image_exclusions)])
   confidential_limit_volumes_image_exclusions = flatten([for k, v in var.confidential_applications : v.policy_exclusions.limit_volumes.image_exclusions if can(v.policy_exclusions.limit_volumes.image_exclusions)])
-  
-  standard_no_priv_escalation_image_exclusions = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_priv_escalation.image_exclusions if can(v.policy_exclusions.no_priv_escalation.image_exclusions)])
+
+  standard_no_priv_escalation_image_exclusions     = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_priv_escalation.image_exclusions if can(v.policy_exclusions.no_priv_escalation.image_exclusions)])
   confidential_no_priv_escalation_image_exclusions = flatten([for k, v in var.confidential_applications : v.policy_exclusions.no_priv_escalation.image_exclusions if can(v.policy_exclusions.no_priv_escalation.image_exclusions)])
-  
-  standard_no_sysadmin_cap_image_exclusions = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_sysadmin_cap.image_exclusions if can(v.policy_exclusions.no_sysadmin_cap.image_exclusions)])
+
+  standard_no_sysadmin_cap_image_exclusions     = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_sysadmin_cap.image_exclusions if can(v.policy_exclusions.no_sysadmin_cap.image_exclusions)])
   confidential_no_sysadmin_cap_image_exclusions = flatten([for k, v in var.confidential_applications : v.policy_exclusions.no_sysadmin_cap.image_exclusions if can(v.policy_exclusions.no_sysadmin_cap.image_exclusions)])
-  
-  standard_no_api_credentials_image_exclusions = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_api_credentials.image_exclusions if can(v.policy_exclusions.no_api_credentials.image_exclusions)])
+
+  standard_no_api_credentials_image_exclusions     = flatten([for k, v in var.standard_applications : v.policy_exclusions.no_api_credentials.image_exclusions if can(v.policy_exclusions.no_api_credentials.image_exclusions)])
   confidential_no_api_credentials_image_exclusions = flatten([for k, v in var.confidential_applications : v.policy_exclusions.no_api_credentials.image_exclusions if can(v.policy_exclusions.no_api_credentials.image_exclusions)])
-  
+
   # For specific policy loop applications, return application name if field exclude_whole_namespace exists and containst value true
-  standard_no_priv_containers_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_priv_containers.exclude_whole_namespace == true, false)]
+  standard_no_priv_containers_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_priv_containers.exclude_whole_namespace == true, false)]
   confidential_no_priv_containers_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.no_priv_containers.exclude_whole_namespace == true, false)]
 
-  standard_https_ingress_only_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.https_ingress_only.exclude_whole_namespace == true, false)]
+  standard_https_ingress_only_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.https_ingress_only.exclude_whole_namespace == true, false)]
   confidential_https_ingress_only_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.https_ingress_only.exclude_whole_namespace == true, false)]
 
-  standard_limit_volumes_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.limit_volumes.exclude_whole_namespace == true, false)]
+  standard_limit_volumes_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.limit_volumes.exclude_whole_namespace == true, false)]
   confidential_limit_volumes_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.limit_volumes.exclude_whole_namespace == true, false)]
 
-  standard_no_priv_escalation_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_priv_escalation.exclude_whole_namespace == true, false)]
+  standard_no_priv_escalation_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_priv_escalation.exclude_whole_namespace == true, false)]
   confidential_no_priv_escalation_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.no_priv_escalation.exclude_whole_namespace == true, false)]
 
-  standard_no_sysctl_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_sysctl.exclude_whole_namespace == true, false)]
+  standard_no_sysctl_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_sysctl.exclude_whole_namespace == true, false)]
   confidential_no_sysctl_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.no_sysctl.exclude_whole_namespace == true, false)]
 
-  standard_no_sysadmin_cap_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_sysadmin_cap.exclude_whole_namespace == true, false)]
+  standard_no_sysadmin_cap_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_sysadmin_cap.exclude_whole_namespace == true, false)]
   confidential_no_sysadmin_cap_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.no_sysadmin_cap.exclude_whole_namespace == true, false)]
-  
-  standard_no_external_lb_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_external_lb.exclude_whole_namespace == true, false)]
+
+  standard_no_external_lb_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_external_lb.exclude_whole_namespace == true, false)]
   confidential_no_external_lb_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.no_external_lb.exclude_whole_namespace == true, false)]
 
-  standard_no_api_credentials_namespace_exclusions = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_api_credentials.exclude_whole_namespace == true, false)]
+  standard_no_api_credentials_namespace_exclusions     = [for k, v in var.standard_applications : k if try(v.policy_exclusions.no_api_credentials.exclude_whole_namespace == true, false)]
   confidential_no_api_credentials_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.no_api_credentials.exclude_whole_namespace == true, false)]
 
   # Default namespace exclusions
-  default_no_priv_containers_namespace_exclusions = ["kube-system",  "gatekeeper-system",  "shared-components"]
-  default_https_ingress_only_namespace_exclusions = ["kube-system",  "gatekeeper-system"]
-  default_limit_volumes_namespace_exclusions = ["kube-system",  "gatekeeper-system", "shared-components"]
-  default_no_priv_escalation_namespace_exclusions = ["kube-system",  "gatekeeper-system", "shared-components"]
-  default_no_sysctl_namespace_exclusions = ["kube-system",  "gatekeeper-system"]
-  default_no_sysadmin_cap_namespace_exclusions = ["kube-system",  "gatekeeper-system"]
-  default_no_external_lb_namespace_exclusions = ["kube-system",  "gatekeeper-system", "shared-components"]
-  default_no_api_credentials_namespace_exclusions = ["kube-system",  "gatekeeper-system", "shared-components"]
+  default_no_priv_containers_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components"]
+  default_https_ingress_only_namespace_exclusions = ["kube-system", "gatekeeper-system"]
+  default_limit_volumes_namespace_exclusions      = ["kube-system", "gatekeeper-system", "shared-components"]
+  default_no_priv_escalation_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components"]
+  default_no_sysctl_namespace_exclusions          = ["kube-system", "gatekeeper-system"]
+  default_no_sysadmin_cap_namespace_exclusions    = ["kube-system", "gatekeeper-system"]
+  default_no_external_lb_namespace_exclusions     = ["kube-system", "gatekeeper-system", "shared-components"]
+  default_no_api_credentials_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components"]
 
   # Default image exclusions
   default_no_priv_containers_image_exclusions = ["mcr.microsoft.com/mcr/hello-world:*"]
-  default_limit_volumes_image_exclusions = []
+  default_limit_volumes_image_exclusions      = []
   default_no_priv_escalation_image_exclusions = []
-  default_no_sysadmin_cap_image_exclusions = []
+  default_no_sysadmin_cap_image_exclusions    = []
   default_no_api_credentials_image_exclusions = []
 
   # Concat results from standard and confidential applications and default exclusions
-  no_priv_containers_image_exclusions = distinct(concat(local.standard_no_priv_containers_image_exclusions, local.confidential_no_priv_containers_image_exclusions, local.default_no_priv_containers_image_exclusions))
+  no_priv_containers_image_exclusions     = distinct(concat(local.standard_no_priv_containers_image_exclusions, local.confidential_no_priv_containers_image_exclusions, local.default_no_priv_containers_image_exclusions))
   no_priv_containers_namespace_exclusions = concat(local.standard_no_priv_containers_namespace_exclusions, local.confidential_no_priv_containers_namespace_exclusions, local.default_no_priv_containers_namespace_exclusions)
-  
+
   https_ingress_only_namespace_exclusions = concat(local.standard_https_ingress_only_namespace_exclusions, local.confidential_https_ingress_only_namespace_exclusions, local.default_https_ingress_only_namespace_exclusions)
-  
-  limit_volumes_image_exclusions = distinct(concat(local.standard_limit_volumes_image_exclusions, local.confidential_limit_volumes_image_exclusions, local.default_limit_volumes_image_exclusions))
+
+  limit_volumes_image_exclusions     = distinct(concat(local.standard_limit_volumes_image_exclusions, local.confidential_limit_volumes_image_exclusions, local.default_limit_volumes_image_exclusions))
   limit_volumes_namespace_exclusions = concat(local.standard_limit_volumes_namespace_exclusions, local.confidential_limit_volumes_namespace_exclusions, local.default_limit_volumes_namespace_exclusions)
-  
-  no_priv_escalation_image_exclusions = distinct(concat(local.standard_no_priv_escalation_image_exclusions, local.confidential_no_priv_escalation_image_exclusions, local.default_no_priv_escalation_image_exclusions))
+
+  no_priv_escalation_image_exclusions     = distinct(concat(local.standard_no_priv_escalation_image_exclusions, local.confidential_no_priv_escalation_image_exclusions, local.default_no_priv_escalation_image_exclusions))
   no_priv_escalation_namespace_exclusions = concat(local.standard_no_priv_escalation_namespace_exclusions, local.confidential_no_priv_escalation_namespace_exclusions, local.default_no_priv_escalation_namespace_exclusions)
-  
+
   no_sysctl_namespace_exclusions = concat(local.standard_no_sysctl_namespace_exclusions, local.confidential_no_sysctl_namespace_exclusions, local.default_no_sysctl_namespace_exclusions)
-  
-  no_sysadmin_cap_image_exclusions = distinct(concat(local.standard_no_sysadmin_cap_image_exclusions, local.confidential_no_sysadmin_cap_image_exclusions, local.default_no_sysadmin_cap_image_exclusions))
+
+  no_sysadmin_cap_image_exclusions     = distinct(concat(local.standard_no_sysadmin_cap_image_exclusions, local.confidential_no_sysadmin_cap_image_exclusions, local.default_no_sysadmin_cap_image_exclusions))
   no_sysadmin_cap_namespace_exclusions = concat(local.standard_no_sysadmin_cap_namespace_exclusions, local.confidential_no_sysadmin_cap_namespace_exclusions, local.default_no_sysadmin_cap_namespace_exclusions)
-  
+
   no_external_lb_namespace_exclusions = concat(local.standard_no_external_lb_namespace_exclusions, local.confidential_no_external_lb_namespace_exclusions, local.default_no_external_lb_namespace_exclusions)
-  
-  no_api_credentials_image_exclusions = distinct(concat(local.standard_no_api_credentials_image_exclusions, local.confidential_no_api_credentials_image_exclusions, local.default_no_api_credentials_image_exclusions))
+
+  no_api_credentials_image_exclusions     = distinct(concat(local.standard_no_api_credentials_image_exclusions, local.confidential_no_api_credentials_image_exclusions, local.default_no_api_credentials_image_exclusions))
   no_api_credentials_namespace_exclusions = concat(local.standard_no_api_credentials_namespace_exclusions, local.confidential_no_api_credentials_namespace_exclusions, local.default_no_api_credentials_namespace_exclusions)
 }
 
@@ -134,7 +134,7 @@ EOF
 resource "azurerm_resource_policy_assignment" "no_priv_escalation" {
   name                 = "no_priv_escalation"
   resource_id          = azurerm_kubernetes_cluster.main.id
-  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/1c6e92c9-99f0-4e55-9cf2-0c234dconfidential8f99"
+  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/1c6e92c9-99f0-4e55-9cf2-0c234dc48f99"
 
   parameters = <<EOF
 {
@@ -183,7 +183,7 @@ EOF
 resource "azurerm_resource_policy_assignment" "no_external_lb" {
   name                 = "no_external_lb"
   resource_id          = azurerm_kubernetes_cluster.main.id
-  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/3fconfidentialdc25-5baf-40d8-9b05-7fe74c1bc64e"
+  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/3fc4dc25-5baf-40d8-9b05-7fe74c1bc64e"
 
   parameters = <<EOF
 {
@@ -198,7 +198,7 @@ EOF
 resource "azurerm_resource_policy_assignment" "no_api_credentials" {
   name                 = "no_api_credentials"
   resource_id          = azurerm_kubernetes_cluster.main.id
-  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/423dd1ba-798e-40e4-9confidentiald-b6902674b423"
+  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/423dd1ba-798e-40e4-9c4d-b6902674b423"
 
   parameters = <<EOF
 {

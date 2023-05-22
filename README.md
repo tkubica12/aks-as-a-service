@@ -95,7 +95,9 @@ az aks command invoke -n cluster01 -g cluster01 -f . -c \
     kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml; 
     helm upgrade -i argocd-bootstrap . --set repo_token=$REPO_TOKEN --set cluster_name=cluster01"
 ```
-1. Now you can develop Terraform code, Helm templates etc. When merging back to main discard changes in targetRevision (or modify it back to "main")
+Now you can develop Terraform code, Helm templates etc. When merging back to main discard changes in targetRevision (or modify it back to "main").
+
+When modifying Terraform variables or adding modules, run generate_docs.tf to regenerate Terraform documentation.
 
 
 ## Compute isolation
@@ -111,6 +113,6 @@ See [./docs/network_isolation.md](./docs/network_isolation.md)
 See [./docs/policies.md](./docs/policies.md)
 
 ## Terraform docs
-AKS main module: [./docs/terraform.md](./docs/terraform.md)
-aks-system module: [./modules/aks-system/docs/terraform.md](./modules/aks-system/docs/terraform.md)
-aks-apps-rbac module: [./modules/aks-apps-rbac/docs/terraform.md](./modules/aks-apps-rbac/docs/terraform.md)
+- AKS main module: [./docs/terraform.md](./docs/terraform.md)
+- aks-system module: [./modules/aks-system/docs/terraform.md](./modules/aks-system/docs/terraform.md)
+- aks-apps-rbac module: [./modules/aks-apps-rbac/docs/terraform.md](./modules/aks-apps-rbac/docs/terraform.md)

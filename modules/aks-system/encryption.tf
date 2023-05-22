@@ -1,3 +1,13 @@
+// Wait for RBAC and private changes changes to propagate so Terraform can create keys via private endpoint
+resource "time_sleep" "wait" {
+  create_duration = "60s"
+
+  depends_on = [
+    azurerm_role_assignment.system_kv,
+    azurerm_private_endpoint.keyvault_system
+  ]
+}
+
 // Key for system disk encryption
 resource "azurerm_key_vault_key" "system_storage" {
   name         = "system-storage"
@@ -7,7 +17,8 @@ resource "azurerm_key_vault_key" "system_storage" {
 
   depends_on = [
     azurerm_role_assignment.system_kv,
-    azurerm_private_endpoint.keyvault_system
+    azurerm_private_endpoint.keyvault_system,
+    time_sleep.wait
   ]
 
   key_opts = [
@@ -29,7 +40,8 @@ resource "azurerm_key_vault_key" "kms" {
 
   depends_on = [
     azurerm_role_assignment.system_kv,
-    azurerm_private_endpoint.keyvault_system
+    azurerm_private_endpoint.keyvault_system,
+    time_sleep.wait
   ]
 
   key_opts = [

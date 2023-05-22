@@ -1,3 +1,13 @@
+// Wait for RBAC and private changes changes to propagate so Terraform can create keys via private endpoint
+resource "time_sleep" "wait" {
+  create_duration = "60s"
+
+  depends_on = [
+    azurerm_role_assignment.application_kv,
+    azurerm_private_endpoint.keyvault_application
+  ]
+}
+
 // Key for storage encryption
 resource "azurerm_key_vault_key" "application_storage" {
   name         = "${var.name}-storage"

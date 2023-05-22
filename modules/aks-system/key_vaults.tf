@@ -53,9 +53,3 @@ resource "azurerm_role_assignment" "system_kv" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-# resource "azurerm_role_assignment" "application_kv" {
-#   for_each             = var.standard_applications
-#   scope                = azurerm_key_vault.application[each.key].id
-#   role_definition_name = "Key Vault Administrator"
-#   principal_id         = data.azurerm_client_config.current.object_id
-# }

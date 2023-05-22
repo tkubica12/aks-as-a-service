@@ -307,7 +307,10 @@ The following outputs are exported:
 
 ### <a name="output_runtime"></a> [runtime](#output\_runtime)
 
-Description: n/a
+Description:   
+Compiles runtime information such as identitz IDs and other properties and outputs it as YAML.  
+
+This will be used in cluster/clustername root that calls this to store runtime.yaml in Git that is then read by ArgoCD to get access to this kind of information.
 
 <!-- markdownlint-enable -->
 

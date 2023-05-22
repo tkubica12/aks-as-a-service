@@ -10,6 +10,8 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) (~>1)
 
+- <a name="requirement_time"></a> [time](#requirement\_time) (~>0.9)
+
 ## Modules
 
 No modules.
@@ -21,19 +23,19 @@ The following input variables are required:
 
 ### <a name="input_api_subnet_id"></a> [api\_subnet\_id](#input\_api\_subnet\_id)
 
-Description: n/a
+Description: ID of subnet where API server is deployed
 
 Type: `string`
 
 ### <a name="input_cluster_private_dns_zone_id"></a> [cluster\_private\_dns\_zone\_id](#input\_cluster\_private\_dns\_zone\_id)
 
-Description: n/a
+Description: ID of existing private DNS zone for cluster - used for private cluster feature
 
 Type: `string`
 
 ### <a name="input_cluster_subnet_id"></a> [cluster\_subnet\_id](#input\_cluster\_subnet\_id)
 
-Description: n/a
+Description: ID of subnet where system nodes are deployed
 
 Type: `string`
 
@@ -51,43 +53,43 @@ Type: `any`
 
 ### <a name="input_keyvault_private_dns_zone_id"></a> [keyvault\_private\_dns\_zone\_id](#input\_keyvault\_private\_dns\_zone\_id)
 
-Description: n/a
+Description: ID of existing private DNS zone for keyvault for private endpoints
 
 Type: `string`
 
 ### <a name="input_location"></a> [location](#input\_location)
 
-Description: n/a
+Description: Azure region of cluster such as westeurope, northeurope or swedencentral
 
 Type: `string`
 
 ### <a name="input_log_analytics_id_defender"></a> [log\_analytics\_id\_defender](#input\_log\_analytics\_id\_defender)
 
-Description: n/a
+Description: ID of existing log analytics workspace for Azure Defender for Kubernetes
 
 Type: `string`
 
 ### <a name="input_name"></a> [name](#input\_name)
 
-Description: n/a
+Description: Name of cluster
 
 Type: `string`
 
 ### <a name="input_node_sku"></a> [node\_sku](#input\_node\_sku)
 
-Description: n/a
+Description: VM SKU for system AKS nodes such as Standard\_D4ads\_v5
 
 Type: `string`
 
 ### <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id)
 
-Description: n/a
+Description: ID of resource group where cluster is deployed
 
 Type: `string`
 
 ### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
 
-Description: n/a
+Description: Name of resource group where cluster is deployed
 
 Type: `string`
 
@@ -117,7 +119,7 @@ Default: `"b0797e57-4a37-4f7d-9def-b312831bc3d7"`
 
 ### <a name="input_cluster_sku"></a> [cluster\_sku](#input\_cluster\_sku)
 
-Description: n/a
+Description: SKU for cluster such as Free or Standard, for production Standard is recommended
 
 Type: `string`
 
@@ -125,7 +127,7 @@ Default: `"Free"`
 
 ### <a name="input_cluster_upgrade_channel"></a> [cluster\_upgrade\_channel](#input\_cluster\_upgrade\_channel)
 
-Description: n/a
+Description: Channel for automatic cluster upgrades such as stable, patch, rapid, node-image or none
 
 Type: `string`
 
@@ -133,7 +135,7 @@ Default: `"stable"`
 
 ### <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version)
 
-Description: n/a
+Description: Cluster version such as 1.24.1 for specific version or 1.24 for latest patch version
 
 Type: `string`
 
@@ -141,7 +143,7 @@ Default: `"1.24"`
 
 ### <a name="input_max_count"></a> [max\_count](#input\_max\_count)
 
-Description: n/a
+Description: Maximum count of system nodes
 
 Type: `number`
 
@@ -149,7 +151,7 @@ Default: `3`
 
 ### <a name="input_min_count"></a> [min\_count](#input\_min\_count)
 
-Description: n/a
+Description: Minimum count of system nodes
 
 Type: `number`
 
@@ -157,7 +159,7 @@ Default: `3`
 
 ### <a name="input_node_count"></a> [node\_count](#input\_node\_count)
 
-Description: n/a
+Description: Initial count of system nodes
 
 Type: `number`
 
@@ -210,6 +212,7 @@ The following resources are used by this module:
 - [azurerm_user_assigned_identity.shared_identity](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) (resource)
 - [random_string.aks_kv](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) (resource)
 - [random_string.monitor](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) (resource)
+- [time_sleep.wait](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) (resource)
 - [azapi_resource_action.api_management_gateway_token](https://registry.terraform.io/providers/azure/azapi/latest/docs/data-sources/resource_action) (data source)
 - [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) (data source)
 
