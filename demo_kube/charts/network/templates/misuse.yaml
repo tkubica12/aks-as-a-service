@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app101-misuse
+  namespace: app101
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app101-misuse
+  template:
+    metadata:
+      labels:
+        app: app101-misuse
+    spec:
+      initContainers:
+      - name: init-nginx
+        image: busybox
+        command: ['sh', '-c', 'echo "Hello from app102" > /usr/share/nginx/html/index.html']
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: html
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app101-misuse
+  namespace: app101
+spec:
+  selector:
+    app: app101-misuse
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app101-misuse
+  namespace: app101
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx-ingress-external
+  rules:
+  {{- $ip_map := first (lookup "v1" "Service" "shared-components" "nginx-ingress-external-ingress-nginx-controller").status.loadBalancer.ingress }}
+  - host: app102.{{ $ip_map.ip  }}.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app101-misuse
+            port:
+              number: 80

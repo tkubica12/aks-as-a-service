@@ -79,7 +79,7 @@ CI/CD is TBD and will be part of this repo.
 For manual steps see [./docs/deployment.md](./docs/deployment.md)
 
 ## Demonstration and testing
-For testing and demonstration see [here](demo_kube/README.md)
+For testing and demonstration see [here](./demo_kube/README.md)
 
 ## Development
 1. Create new branch

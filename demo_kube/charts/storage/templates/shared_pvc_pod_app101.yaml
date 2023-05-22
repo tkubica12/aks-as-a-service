@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-shared-standardlrs
+  namespace: app101
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: app101-azdisk-standardssd-lrs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-shared-standardlrs
+  namespace: app101
+spec:
+  selector:
+    matchLabels:
+      app: pod-shared-standardlrs
+  template:
+    metadata:
+      labels:
+        app: pod-shared-standardlrs
+    spec:
+      containers:
+      - name: pod-shared-standardlrs
+        image: nginx
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+        volumeMounts:
+          - name: azuredisk01
+            mountPath: "/mnt/azuredisk"
+      volumes:
+        - name: azuredisk01
+          persistentVolumeClaim:
+            claimName: pvc-shared-standardlrs
