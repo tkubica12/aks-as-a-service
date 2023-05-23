@@ -41,14 +41,14 @@ locals {
   confidential_no_api_credentials_namespace_exclusions = [for k, v in var.confidential_applications : k if try(v.policy_exclusions.no_api_credentials.exclude_whole_namespace == true, false)]
 
   # Default namespace exclusions
-  default_no_priv_containers_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components"]
+  default_no_priv_containers_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components", "aks-command"]
   default_https_ingress_only_namespace_exclusions = ["kube-system", "gatekeeper-system"]
-  default_limit_volumes_namespace_exclusions      = ["kube-system", "gatekeeper-system", "shared-components"]
-  default_no_priv_escalation_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components"]
+  default_limit_volumes_namespace_exclusions      = ["kube-system", "gatekeeper-system", "shared-components", "aks-command", "argocd"]
+  default_no_priv_escalation_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components", "aks-command"]
   default_no_sysctl_namespace_exclusions          = ["kube-system", "gatekeeper-system"]
-  default_no_sysadmin_cap_namespace_exclusions    = ["kube-system", "gatekeeper-system"]
+  default_no_sysadmin_cap_namespace_exclusions    = ["kube-system", "gatekeeper-system", "aks-command"]
   default_no_external_lb_namespace_exclusions     = ["kube-system", "gatekeeper-system", "shared-components"]
-  default_no_api_credentials_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components"]
+  default_no_api_credentials_namespace_exclusions = ["kube-system", "gatekeeper-system", "shared-components", "aks-command", "argocd"]
 
   # Default image exclusions
   default_no_priv_containers_image_exclusions = ["mcr.microsoft.com/mcr/hello-world:*"]

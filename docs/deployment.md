@@ -39,7 +39,7 @@ Another option is to connect to **jump server** and work on it. I recommend usin
 ssh tomas@20.166.57.174
 
 ## Get cluster credentials -> admin credentials for testing, will be forbidden in production
-az aks get-credentials -n cluster01 -g cluster01 --admin --overwrite
+az aks get-credentials -n cluster01 -g cluster01 --admin --overwrite-existing
 
 ## Port forwarding local to jump (and from there you can forward ArgoCD UI Pod)
 ssh -L 8081:127.0.0.1:8080 tomas@20.166.57.174
@@ -63,7 +63,7 @@ terraform apply -auto-approve
 
 # Bootstrap ArgoCD via Azure API (no need to have access to Kubernetes API)
 export REPO_TOKEN=mytoken
-cd ../../charts/argocd_bootstrap/
+cd ./charts/argocd_bootstrap/
 az aks command invoke -n cluster01 -g cluster01 -f . -c \
     "kubectl create namespace argocd; 
     kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml; 

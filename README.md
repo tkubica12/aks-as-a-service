@@ -20,17 +20,19 @@ graph LR;
     subgraph Git
         manifest{manifest.yaml}
         runtime{runtime.yaml}
+        terraform_root
     end;
 
     manifest{manifest.yaml} -- YAML consumed --> terraform_root
     manifest -- YAML consumed --> argocd_cluster
     terraform_root .-> runtime{runtime.yaml}
+    terraform_root --> aks
 
     subgraph Terraform
-        terraform_root --> aks-system;
-        terraform_root --> aks-apps;
+        aks --> aks-system;
+        aks --> aks-apps;
 
-        aks-system .-> aks(AKS with extensions and addons)
+        aks-system .-> aks_cluster(AKS with extensions and addons)
         aks-system .-> system_nodepool(Nodepool for system components)
         aks-system .-> shared_nodepools(Nodepools for shared compute environments)
         aks-system .-> dedicated_nodepools(Nodepools for dedicated compute environments)
@@ -58,7 +60,7 @@ graph LR;
         configurations .-> resource_quotas;
     end;
 
-    runtime .-> service_accounts
+    runtime .-> configurations
 ```
 
 ## Automation steps

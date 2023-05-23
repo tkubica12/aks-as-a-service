@@ -6,6 +6,6 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repo-creds
 stringData:
-  url: https://github.com/tkubica12/enterprise-container-platform
+  url: https://github.com/tkubica12/aks-as-a-service
   username: notused
   password: {{ .Values.repo_token }}

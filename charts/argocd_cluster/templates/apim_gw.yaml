@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/tkubica12/enterprise-container-platform
+    repoURL: https://github.com/tkubica12/aks-as-a-service
     path: charts/apim_gw
     targetRevision: main
     helm:
