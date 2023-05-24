@@ -57,6 +57,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     enable_host_encryption = true # Enable host encryption of temp disk and storage access
     os_disk_type           = "Managed"
     os_disk_size_gb        = 128
+    os_sku                 = "CBLMariner"
     vnet_subnet_id         = var.cluster_subnet_id
     zones                  = [1, 2, 3]
 
