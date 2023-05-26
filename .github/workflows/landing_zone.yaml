@@ -44,3 +44,6 @@ jobs:
     
     - name: Show my token
       run: 'echo "token: ${{ steps.parse_runner_token.outputs.value }}"'
+
+    - name: Deploy landing zone
+      run: terraform apply -auto-approve -var "github_runner_token=${{ steps.parse_runner_token.outputs.value }}"

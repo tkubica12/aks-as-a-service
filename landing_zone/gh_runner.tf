@@ -12,7 +12,7 @@ resource "azurerm_network_interface" "runner" {
 }
 
 resource "azurerm_linux_virtual_machine" "runner" {
-  count               = var.enable_runner ? 1 : 0
+  count                           = var.enable_runner ? 1 : 0
   name                            = "runner-vm"
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
@@ -20,7 +20,7 @@ resource "azurerm_linux_virtual_machine" "runner" {
   admin_username                  = "tomas"
   disable_password_authentication = false
   admin_password                  = "Azure12345678:"
-  # custom_data         = filebase64("jump_install.sh")
+  custom_data                     = base64encode(local.github_runner_script)
 
   network_interface_ids = [
     azurerm_network_interface.runner[0].id,
@@ -41,4 +41,16 @@ resource "azurerm_linux_virtual_machine" "runner" {
   }
 
   boot_diagnostics {}
+}
+
+locals {
+  github_runner_script = <<SCRIPT
+#!/bin/bash
+mkdir actions-runner && cd actions-runner
+curl -o actions-runner-linux-x64-2.304.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.304.0/actions-runner-linux-x64-2.304.0.tar.gz
+tar xzf ./actions-runner-linux-x64-2.304.0.tar.gz
+./config.sh --url https://github.com/tkubica12/aks-as-a-service --unattended --replace --name tomrunner --token ${var.github_runner_token}
+sudo ./svc.sh install
+sudo ./svc.sh start
+SCRIPT
 }

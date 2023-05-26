@@ -1,7 +1,7 @@
 variable "my_ip" {
   type    = string
   default = "178.17.15.151"
-}   
+}
 
 variable "enable_jump" {
   type    = bool
@@ -21,4 +21,10 @@ variable "enable_vpn" {
 variable "provision_aad" {
   type    = bool
   default = false
+}
+
+variable "github_runner_token" {
+  type      = string
+  sensitive = true
+  default   = ""
 }
