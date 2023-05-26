@@ -36,5 +36,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
 
-    - run: "echo outputs: '${{ steps.get_runner_token.outputs.data }}'"
-    - run: "echo outputs: '${{ steps.get_runner_token.outputs.data.outputs.token }}'"
+    - name: Parse token
+      uses: sergeysova/jq-action@v2
+      id: parse_runner_token
+      with:
+        cmd: 'echo ${{ steps.get_runner_token.outputs.data }} | jq .outputs.token -r'
+    
+    - name: Show my token
+      run: 'echo "token: ${{ steps.parse_runner_token.outputs.value }}"'
