@@ -19,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "runner" {
   size                            = "Standard_B2s"
   admin_username                  = "tomas"
   disable_password_authentication = false
-  admin_password                  = "Azure12345678:"
+  admin_password                  = "Azure12345678"
   custom_data                     = base64encode(local.github_runner_script)
 
   network_interface_ids = [

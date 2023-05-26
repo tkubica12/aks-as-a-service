@@ -43,21 +43,18 @@ resource "azurerm_network_interface_security_group_association" "jump" {
 }
 
 resource "azurerm_linux_virtual_machine" "jump" {
-  name                = "jump-vm"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
-  size                = "Standard_B2s"
-  admin_username      = "tomas"
-  custom_data         = filebase64("jump_install.sh")
+  name                            = "jump-vm"
+  resource_group_name             = azurerm_resource_group.main.name
+  location                        = azurerm_resource_group.main.location
+  size                            = "Standard_B2s"
+  admin_username                  = "tomas"
+  disable_password_authentication = false
+  admin_password                  = "Azure12345678"
+  custom_data                     = filebase64("jump_install.sh")
 
   network_interface_ids = [
     azurerm_network_interface.jump.id,
   ]
-
-  admin_ssh_key {
-    username   = "tomas"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
 
   os_disk {
     caching              = "ReadWrite"
@@ -66,8 +63,6 @@ resource "azurerm_linux_virtual_machine" "jump" {
 
   source_image_reference {
     publisher = "Canonical"
-    # offer     = "0001-com-ubuntu-server-jammy"
-    # sku       = "22_04-lts"
     offer     = "UbuntuServer"
     sku       = "18.04-LTS"
     version   = "latest"
@@ -76,6 +71,6 @@ resource "azurerm_linux_virtual_machine" "jump" {
   boot_diagnostics {}
 
   lifecycle {
-    ignore_changes = [ custom_data ]
+    ignore_changes = [custom_data]
   }
 }
