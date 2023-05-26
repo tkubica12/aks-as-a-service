@@ -27,6 +27,7 @@ terraform {
     container_name       = "tfstate"
     key                  = "aksaas.lz.tfstate"
     subscription_id      = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
+    use_oidc             = true
   }
 }
 
