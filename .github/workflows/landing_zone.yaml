@@ -27,3 +27,14 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
+
+    - name: Get token for self-hosted runner registration
+      uses: roncsak/getRunnerToken@v1.0.0
+      id  : runnerRegistration 
+      with:
+        token: ${{ secrets.PAT }}
+
+    - name: Use the token in subsequent steps
+      run : |
+        echo ${{ steps.runnerRegistration.outputs.token }}
+        echo "Your token expires at: ${{ steps.runnerRegistration.outputs.expires_at }}"
