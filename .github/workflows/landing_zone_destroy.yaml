@@ -33,7 +33,7 @@ jobs:
       uses: octokit/request-action@v2.x
       id: list_runners_token
       with:
-        route: GET /repos/tkubica12/aks-as-a-service/actions/runners/downloads
+        route: GET /repos/tkubica12/aks-as-a-service/actions/runners
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
 
