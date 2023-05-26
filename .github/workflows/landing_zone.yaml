@@ -30,8 +30,10 @@ jobs:
 
     - name: Get token for self-hosted runner registration
       uses: octokit/request-action@v2.x
+      id: get_runner_token
       with:
         route: POST /repos/tkubica12/aks-as-a-service/actions/runners/registration-token
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
 
+    - run: "echo outputs: '${{ steps.get_runner_token.outputs.data }}'"
