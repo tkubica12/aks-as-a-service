@@ -7,7 +7,7 @@ resource "azurerm_virtual_network_peering" "cluster01_hub" {
   allow_forwarded_traffic      = true
   allow_virtual_network_access = true
   allow_gateway_transit        = false
-  use_remote_gateways          = true
+  use_remote_gateways          = var.enable_vpn
 }
 
 resource "azurerm_virtual_network_peering" "hub_cluster01" {
@@ -17,6 +17,6 @@ resource "azurerm_virtual_network_peering" "hub_cluster01" {
   remote_virtual_network_id    = azurerm_virtual_network.cluster01.id
   allow_forwarded_traffic      = true
   allow_virtual_network_access = true
-  allow_gateway_transit        = true
+  allow_gateway_transit        = var.enable_vpn
   use_remote_gateways          = false
 }
