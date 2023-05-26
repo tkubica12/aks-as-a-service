@@ -37,3 +37,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT }}
 
     - run: "echo outputs: '${{ steps.get_runner_token.outputs.data }}'"
+    - run: "echo outputs: '${{ steps.get_runner_token.outputs.data.outputs.token }}'"
