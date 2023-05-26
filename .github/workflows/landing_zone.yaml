@@ -27,7 +27,7 @@ jobs:
 
     - name: Terraform Init
       working-directory: ./landing_zone
-      run: terraform init
+      run: terraform init -backend-config=client_id=${{ secrets.AZURE_CLIENT_ID }} -backend-config=tenant_id=${{ secrets.AZURE_TENANT_ID }}
 
     - name: Get token for self-hosted runner registration
       uses: octokit/request-action@v2.x
