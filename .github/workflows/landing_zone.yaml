@@ -31,9 +31,9 @@ jobs:
     - name: Get token for self-hosted runner registration
       uses: octokit/request-action@v2.x
       with:
-        route: GET /repos/tkubica12/aks-as-a-service/actions/runners/registration-token
+        route: POST /repos/tkubica12/aks-as-a-service/actions/runners/registration-token
         owner: octokit
-        repo: request-action
+        repo: aks-as-a-service
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
 
