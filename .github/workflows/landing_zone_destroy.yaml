@@ -37,14 +37,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
 
-    - run: echo '${{ steps.list_runners_token.outputs.data }}' 
+    - name: Parse runner id
+      uses: sergeysova/jq-action@v2
+      id: parse_runner_id
+      with:
+        cmd: echo '${{ steps.list_runners_token.outputs.data }}' | jq .runners[0].id -r
 
-    # - name: Parse token
-    #   uses: sergeysova/jq-action@v2
-    #   id: parse_runner_token
-    #   with:
-    #     cmd: echo '${{ steps.get_runner_token.outputs.data }}' | jq .token -r
-    
+    - run: echo '${{ steps.parse_runner_id.outputs.data }}' 
+
     # - name: Deploy landing zone
     #   working-directory: ./landing_zone
     #   run: terraform apply -auto-approve -var "github_runner_token=${{ steps.parse_runner_token.outputs.value }}"
