@@ -56,6 +56,7 @@ echo Extracting runner
 tar xzf ./actions-runner-linux-x64-2.304.0.tar.gz
 
 echo Configuring runner
+export RUNNER_ALLOW_RUNASROOT=1
 ./config.sh --url https://github.com/tkubica12/aks-as-a-service --unattended --replace --name tomrunner --token ${var.github_runner_token}
 
 echo Installing runner
