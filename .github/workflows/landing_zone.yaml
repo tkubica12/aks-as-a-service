@@ -26,6 +26,7 @@ jobs:
         terraform_wrapper: false
 
     - name: Terraform Init
+      working-directory: ./landing_zone
       run: terraform init
 
     - name: Get token for self-hosted runner registration
