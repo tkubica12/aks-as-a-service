@@ -10,24 +10,28 @@ jobs:
       id-token: write
     steps:
 
-    # - name: Checkout
-    #   uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
 
-    # - name: Azure Login
-    #   uses: azure/login@v1
-    #   with:
-    #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
-    #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-    #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v2
-    #   with:
-    #     terraform_wrapper: false
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
 
-    # - name: Terraform Init
-    #   working-directory: ./landing_zone
-    #   run: terraform init -backend-config=client_id=${{ secrets.AZURE_CLIENT_ID }} -backend-config=tenant_id=${{ secrets.AZURE_TENANT_ID }}
+    - name: Terraform Init
+      working-directory: ./landing_zone
+      run: terraform init -backend-config=client_id=${{ secrets.AZURE_CLIENT_ID }} -backend-config=tenant_id=${{ secrets.AZURE_TENANT_ID }}
+
+    - name: Terraform Destroy
+      working-directory: ./landing_zone
+      run: terraform destroy -auto-approve
 
     - name: List repo runners
       uses: octokit/request-action@v2.x
