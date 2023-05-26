@@ -29,7 +29,7 @@ jobs:
     #   working-directory: ./landing_zone
     #   run: terraform init -backend-config=client_id=${{ secrets.AZURE_CLIENT_ID }} -backend-config=tenant_id=${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Get token for self-hosted runner registration
+    - name: List repo runners
       uses: octokit/request-action@v2.x
       id: list_runners_token
       with:
@@ -37,14 +37,16 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
 
-    - name: Parse runner id
+    - name: Parse first runner id
       uses: sergeysova/jq-action@v2
       id: parse_runner_id
       with:
         cmd: echo '${{ steps.list_runners_token.outputs.data }}' | jq .runners[0].id -r
 
-    - run: echo '${{ steps.parse_runner_id.outputs.data }}' 
-
-    # - name: Deploy landing zone
-    #   working-directory: ./landing_zone
-    #   run: terraform apply -auto-approve -var "github_runner_token=${{ steps.parse_runner_token.outputs.value }}"
+    - name: Delete repo runner
+      uses: octokit/request-action@v2.x
+      id: delete_runner
+      with:
+        route: DELETE /repos/tkubica12/aks-as-a-service/actions/runners/${{ steps.parse_runner_id.outputs.value }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
