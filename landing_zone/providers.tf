@@ -21,6 +21,13 @@ terraform {
     #   version = "~>2"
     # }
   }
+  backend "azurerm" {
+    resource_group_name  = "base"
+    storage_account_name = "tkubicastore"
+    container_name       = "tfstate"
+    key                  = "aksaas.lz.tfstate"
+    subscription_id      = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
+  }
 }
 
 provider "azurerm" {
