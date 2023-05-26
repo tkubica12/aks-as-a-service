@@ -9,6 +9,7 @@ resource "azurerm_private_dns_zone" "keyvault" {
 }
 
 resource "azurerm_private_dns_resolver" "main" {
+  count               = var.enable_vpn ? 1 : 0
   name                = "resolver"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
@@ -16,9 +17,10 @@ resource "azurerm_private_dns_resolver" "main" {
 }
 
 resource "azurerm_private_dns_resolver_inbound_endpoint" "main" {
+  count                   = var.enable_vpn ? 1 : 0
   name                    = "resolver-inbound"
-  private_dns_resolver_id = azurerm_private_dns_resolver.main.id
-  location                = azurerm_private_dns_resolver.main.location
+  private_dns_resolver_id = azurerm_private_dns_resolver.main[0].id
+  location                = azurerm_private_dns_resolver.main[0].location
 
   ip_configurations {
     private_ip_allocation_method = "Dynamic"

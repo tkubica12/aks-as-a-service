@@ -1,4 +1,5 @@
 resource "azurerm_network_interface" "jump" {
+  count               = var.enable_jump ? 1 : 0
   name                = "jump-nic"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
@@ -7,11 +8,12 @@ resource "azurerm_network_interface" "jump" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.jump.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.jump.id
+    public_ip_address_id          = azurerm_public_ip.jump[0].id
   }
 }
 
 resource "azurerm_public_ip" "jump" {
+  count               = var.enable_jump ? 1 : 0
   name                = "jump-ip"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
@@ -20,6 +22,7 @@ resource "azurerm_public_ip" "jump" {
 }
 
 resource "azurerm_network_security_group" "jump" {
+  count               = var.enable_jump ? 1 : 0
   name                = "jump-nsg"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
@@ -38,11 +41,13 @@ resource "azurerm_network_security_group" "jump" {
 }
 
 resource "azurerm_network_interface_security_group_association" "jump" {
-  network_interface_id      = azurerm_network_interface.jump.id
+  count                     = var.enable_jump ? 1 : 0
+  network_interface_id      = azurerm_network_interface.jump[0].id
   network_security_group_id = azurerm_network_security_group.jump.id
 }
 
 resource "azurerm_linux_virtual_machine" "jump" {
+  count                           = var.enable_jump ? 1 : 0
   name                            = "jump-vm"
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
@@ -53,7 +58,7 @@ resource "azurerm_linux_virtual_machine" "jump" {
   custom_data                     = filebase64("jump_install.sh")
 
   network_interface_ids = [
-    azurerm_network_interface.jump.id,
+    azurerm_network_interface.jump[0].id,
   ]
 
   os_disk {
