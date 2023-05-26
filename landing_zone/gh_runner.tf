@@ -46,11 +46,22 @@ resource "azurerm_linux_virtual_machine" "runner" {
 locals {
   github_runner_script = <<SCRIPT
 #!/bin/bash
+echo Creating directory
 mkdir actions-runner && cd actions-runner
+
+echo Downloading runner
 curl -o actions-runner-linux-x64-2.304.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.304.0/actions-runner-linux-x64-2.304.0.tar.gz
+
+echo Extracting runner
 tar xzf ./actions-runner-linux-x64-2.304.0.tar.gz
+
+echo Configuring runner
 ./config.sh --url https://github.com/tkubica12/aks-as-a-service --unattended --replace --name tomrunner --token ${var.github_runner_token}
+
+echo Installing runner
 ./svc.sh install
+
+echo Starting runner
 ./svc.sh start
 SCRIPT
 }
