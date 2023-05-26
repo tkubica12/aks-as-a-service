@@ -1,4 +1,5 @@
 resource "azurerm_public_ip" "vpn" {
+  count               = var.enable_vpn ? 1 : 0
   name                = "vpn-ip"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
@@ -7,6 +8,7 @@ resource "azurerm_public_ip" "vpn" {
 }
 
 resource "azurerm_virtual_network_gateway" "vpn" {
+  count               = var.enable_vpn ? 1 : 0
   name                = "test"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
@@ -20,7 +22,7 @@ resource "azurerm_virtual_network_gateway" "vpn" {
 
   ip_configuration {
     name                          = "vnetGatewayConfig"
-    public_ip_address_id          = azurerm_public_ip.vpn.id
+    public_ip_address_id          = azurerm_public_ip.vpn[0].id
     private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.gw.id
   }

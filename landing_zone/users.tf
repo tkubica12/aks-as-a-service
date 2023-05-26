@@ -8,7 +8,7 @@ resource "random_password" "password" {
 }
 
 resource "azuread_user" "main" {
-  count               = 10
+  count               = var.provision_aad ? 10 : 0
   user_principal_name = "aks-u${count.index}@tkubica.biz"
   display_name        = "AKS User ${count.index}"
   password            = random_password.password.result
