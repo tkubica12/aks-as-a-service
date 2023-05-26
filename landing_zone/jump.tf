@@ -43,7 +43,7 @@ resource "azurerm_network_security_group" "jump" {
 resource "azurerm_network_interface_security_group_association" "jump" {
   count                     = var.enable_jump ? 1 : 0
   network_interface_id      = azurerm_network_interface.jump[0].id
-  network_security_group_id = azurerm_network_security_group.jump.id
+  network_security_group_id = azurerm_network_security_group.jump[0].id
 }
 
 resource "azurerm_linux_virtual_machine" "jump" {
