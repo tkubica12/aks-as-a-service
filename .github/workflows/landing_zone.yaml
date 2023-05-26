@@ -29,12 +29,11 @@ jobs:
       run: terraform init
 
     - name: Get token for self-hosted runner registration
-      uses: roncsak/getRunnerToken@v1.0.0
-      id  : runnerRegistration 
+      uses: octokit/request-action@v2.x
       with:
-        token: ${{ secrets.PAT }}
+        route: GET /repos/tkubica12/aks-as-a-service/actions/runners/registration-token
+        owner: octokit
+        repo: request-action
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Use the token in subsequent steps
-      run : |
-        echo ${{ steps.runnerRegistration.outputs.token }}
-        echo "Your token expires at: ${{ steps.runnerRegistration.outputs.expires_at }}"
