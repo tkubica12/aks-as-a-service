@@ -16,4 +16,4 @@ jobs:
         route: POST /repos/tkubica12/aks-as-a-service/actions/variables
         body: '{"name": "runner_client_id", "value": "something"}'
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
