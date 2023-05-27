@@ -1,0 +1,19 @@
+name: debug
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: demo
+    permissions:
+      id-token: write
+    steps:
+    - name: Store runner client ID as repo variable
+      uses: octokit/request-action@v2.x
+      id: store_runner_client_id
+      with:
+        route: POST /repos/tkubica12/aks-as-a-service/actions/variables
+        body: {"name": "runner_client_id", "value": "something"}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

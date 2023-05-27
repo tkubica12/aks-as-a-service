@@ -14,9 +14,9 @@ cluster_upgrade_channel: patch
 # OS auto-upgrade channel: SecurityPatch, NodeImage, Unmanaged or None -- PLACEHOLDER, wait for azurerm to implement this preview feature
 os_upgrade_channel: SecurityPatch
 # Cluster region
-location: northeurope
+location: swedencentral
 # Cluster resource group
-resource_group_name: cluster01
+resource_group_name: aks-as-a-service-cluster01
 # Cluster subscription id
 subscription_id: d3b7888f-c26e-4961-a976-ff9d5b31dfd3
 # Cluster tenant id

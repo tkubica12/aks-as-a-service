@@ -28,3 +28,8 @@ variable "github_runner_token" {
   sensitive = true
   default   = ""
 }
+
+variable "location" {
+  type    = string
+  default = "swedencentral"
+}

@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "main" {
-  name     = "demo-infra"
-  location = "northeurope"
+  name     = "aks-as-a-service-lz"
+  location = var.location
 }
 
 data "azurerm_client_config" "current" {}

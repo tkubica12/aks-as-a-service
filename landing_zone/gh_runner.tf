@@ -1,3 +1,17 @@
+resource "azurerm_user_assigned_identity" "runner" {
+  count               = var.enable_runner ? 1 : 0
+  name                = "runner-identity"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+}
+
+resource "azurerm_role_assignment" "runner" {
+  count                = var.enable_runner ? 1 : 0
+  scope                = data.azurerm_client_config.current.subscription_id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.runner[0].principal_id
+}
+
 resource "azurerm_network_interface" "runner" {
   count               = var.enable_runner ? 1 : 0
   name                = "runner-nic"
@@ -21,6 +35,13 @@ resource "azurerm_linux_virtual_machine" "runner" {
   disable_password_authentication = false
   admin_password                  = "Azure12345678"
   custom_data                     = base64encode(local.github_runner_script)
+
+  identity {
+    type = "UserAssigned"
+    identity_ids = [
+      azurerm_user_assigned_identity.runner[0].id,
+    ]
+  }
 
   network_interface_ids = [
     azurerm_network_interface.runner[0].id,
