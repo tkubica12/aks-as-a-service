@@ -24,3 +24,12 @@ jobs:
 
     - name: Azure Login
       run: az login --identity
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
+
+    - name: Terraform Init
+      working-directory: ./clusters/cluster01
+      run: terraform init 

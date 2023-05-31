@@ -21,6 +21,14 @@ terraform {
       version = "~>2"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "base"
+    storage_account_name = "tkubicastore"
+    container_name       = "tfstate"
+    key                  = "aksaas.cluster01.tfstate"
+    subscription_id      = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
+    use_msi              = true
+  }
 }
 
 provider "azurerm" {
@@ -32,6 +40,7 @@ provider "azurerm" {
       purge_soft_delete_on_destroy    = true
       recover_soft_deleted_key_vaults = true
     }
+    use_msi = true
   }
 }
 
