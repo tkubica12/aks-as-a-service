@@ -36,3 +36,7 @@ jobs:
     - name: Terraform Init
       working-directory: ./clusters/cluster01
       run: terraform init 
+
+    - name: Terraform Apply
+      working-directory: ./clusters/cluster01
+      run: terraform apply -auto-approve 
