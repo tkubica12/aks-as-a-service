@@ -10,7 +10,7 @@ data "azurerm_subscription" "current" {}
 resource "azurerm_role_assignment" "runner" {
   count                = var.enable_runner ? 1 : 0
   scope                = data.azurerm_subscription.current.id
-  role_definition_name = "Contributor"
+  role_definition_name = "Owner"
   principal_id         = azurerm_user_assigned_identity.runner[0].principal_id
 }
 
