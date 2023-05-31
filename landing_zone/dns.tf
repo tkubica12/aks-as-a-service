@@ -31,14 +31,14 @@ resource "azurerm_private_dns_resolver_inbound_endpoint" "main" {
 resource "azurerm_private_dns_zone_virtual_network_link" "aks_hub" {
   name                  = "aks-hub"
   resource_group_name   = azurerm_resource_group.main.name
-  private_dns_zone_name = azurerm_private_dns_zone.northeurope.name
+  private_dns_zone_name = azurerm_private_dns_zone.aks.name
   virtual_network_id    = azurerm_virtual_network.hub.id
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "aks_cluster01" {
   name                  = "aks-cluster01"
   resource_group_name   = azurerm_resource_group.main.name
-  private_dns_zone_name = azurerm_private_dns_zone.northeurope.name
+  private_dns_zone_name = azurerm_private_dns_zone.aks.name
   virtual_network_id    = azurerm_virtual_network.cluster01.id
 }
 
