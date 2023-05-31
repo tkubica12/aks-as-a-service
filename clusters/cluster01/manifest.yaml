@@ -22,11 +22,11 @@ subscription_id: d3b7888f-c26e-4961-a976-ff9d5b31dfd3
 # Cluster tenant id
 tenant_id: d6af5f85-2a50-4370-b4b5-9b9a55bcb0dc
 # Resource ID of network subnet for API server (must be delegated)
-api_subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-api
+api_subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-api
 # Resource ID of private cluster DNS Zone
-cluster_private_dns_zone_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/privateDnsZones/privatelink.northeurope.azmk8s.io
+cluster_private_dns_zone_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/privateDnsZones/privatelink.swedencentral.azmk8s.io
 # Resource ID of private endpoint KeyVault DNS zone
-keyvault_private_dns_zone_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net
+keyvault_private_dns_zone_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net
 
 # Definition of ingress types, versions and subnets
 ingress_types:
@@ -34,18 +34,18 @@ ingress_types:
   nginx:
     nginx-ingress-internal:
       version: 4.5.2
-      subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-internal
+      subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-internal
       subnet_name: aks-inbound-internal
     nginx-ingress-external:
       version: 4.5.2
-      subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-external
+      subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-external
       subnet_name: aks-inbound-external
   # One or more Azure API Management self-hosted gateways with their subnets (can share the same if needed)
   apim:
     apim-internal:
-      api_management_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.ApiManagement/service/hclhrwrfduhg
+      api_management_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.ApiManagement/service/hclhrwrfduhg
       api_management_configuration_endpoint: hclhrwrfduhg.configuration.azure-api.net
-      subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-internal
+      subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-internal
       subnet_name: aks-inbound-internal
 
 # System node pool configuration
@@ -59,7 +59,7 @@ system_nodepool:
   # Use more than min if there are custom platform components that autoscale
   max_count: 6
   # Resource ID of network subnet for system nodes
-  subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-system
+  subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-system
 
 # User node pool configurations for shared nodes, define at least one
 shared_nodepools:
@@ -74,7 +74,7 @@ shared_nodepools:
     # Maximum autoscaled nodes in nodepool
     max_count: 2
     # Resource ID of network subnet for this nodepool
-    subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-shared
+    subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-shared
   # Additional nodepools to provide differentiated SKUs, eg. high memory configuration
   highmem:
     # VM SKU
@@ -86,7 +86,7 @@ shared_nodepools:
     # Maximum autoscaled nodes in nodepool
     max_count: 2
     # Resource ID of network subnet for this nodepool
-    subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-shared
+    subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-shared
 
 # Definitions of applications in classes 1-3 that will leverage shared nodepools
 standard_applications:
@@ -228,4 +228,4 @@ confidential_applications:
         - docker.io/registry1/image1*
         - docker.io/registry2/*
     # Resource ID of network subnet for dedicated nodepool
-    subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/demo-infra/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/s201
+    subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/s201
