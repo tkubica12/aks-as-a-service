@@ -9,7 +9,7 @@ jobs:
     permissions:
       id-token: write
     steps:
-    - run: echo runner_client_id=$(date) >> $GITHUB_OUTPUT
+    - run: echo runner_client_id=test >> $GITHUB_OUTPUT
       id: debug
     - run: echo ${{ steps.parse_runner_token.outputs.runner_client_id }}
     # - name: Store runner client ID as repo variable
