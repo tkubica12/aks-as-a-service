@@ -41,7 +41,8 @@ provider "azurerm" {
       recover_soft_deleted_key_vaults = true
     }
   }
-  use_msi = true
+  use_msi         = true
+  subscription_id = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
 }
 
 # provider "helm" {
