@@ -47,16 +47,16 @@ jobs:
       working-directory: ./landing_zone
       run: terraform apply -auto-approve -var "github_runner_token=${{ steps.parse_runner_token.outputs.value }}"
     
-    - name: Capture runner identity client ID
-      id: capture_runner_client_id
-      working-directory: ./landing_zone
-      run: echo runner_client_id=$(terraform output -raw runner_client_id) >> $GITHUB_OUTPUT
+    # - name: Capture runner identity client ID
+    #   id: capture_runner_client_id
+    #   working-directory: ./landing_zone
+    #   run: echo runner_client_id=$(terraform output -raw runner_client_id) >> $GITHUB_OUTPUT
 
-    - name: Store runner client ID as repo variable
-      uses: octokit/request-action@v2.x
-      with:
-        route: POST /repos/tkubica12/aks-as-a-service/actions/variables
-        name: runner_client_id
-        value: ${{ steps.capture_runner_client_id.outputs.runner_client_id }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+    # - name: Store runner client ID as repo variable
+    #   uses: octokit/request-action@v2.x
+    #   with:
+    #     route: POST /repos/tkubica12/aks-as-a-service/actions/variables
+    #     name: runner_client_id
+    #     value: ${{ steps.capture_runner_client_id.outputs.runner_client_id }}
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.PAT }}
