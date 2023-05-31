@@ -43,8 +43,8 @@ ingress_types:
   # One or more Azure API Management self-hosted gateways with their subnets (can share the same if needed)
   apim:
     apim-internal:
-      api_management_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.ApiManagement/service/hclhrwrfduhg
-      api_management_configuration_endpoint: hclhrwrfduhg.configuration.azure-api.net
+      api_management_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.ApiManagement/service/jnnlwbcxbydo
+      api_management_configuration_endpoint: jnnlwbcxbydo.configuration.azure-api.net
       subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-internal
       subnet_name: aks-inbound-internal
 
