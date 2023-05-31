@@ -64,6 +64,12 @@ resource "azurerm_linux_virtual_machine" "runner" {
   }
 
   boot_diagnostics {}
+
+  lifecycle {
+    ignore_changes = [
+      custom_data,
+    ]
+  }
 }
 
 locals {
