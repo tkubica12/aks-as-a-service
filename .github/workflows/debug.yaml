@@ -9,13 +9,15 @@ jobs:
     permissions:
       id-token: write
     steps:
-    - name: Store runner client ID as repo variable
-      uses: octokit/request-action@v2.x
-      id: store_runner_client_id
-      with:
-        route: POST /repos/tkubica12/aks-as-a-service/actions/variables
-        name: runner_client_id
-        value: something
-        # body: '{"name": "runner_client_id", "value": "something"}'
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+    - run: echo {runner_client_id}={$(date)} >> $GITHUB_OUTPUT
+      id: debug
+    - run: echo ${{ ${{ steps.parse_runner_token.outputs.value }} }}
+    # - name: Store runner client ID as repo variable
+    #   uses: octokit/request-action@v2.x
+    #   id: store_runner_client_id
+    #   with:
+    #     route: POST /repos/tkubica12/aks-as-a-service/actions/variables
+    #     name: runner_client_id
+    #     value: something
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.PAT }}
