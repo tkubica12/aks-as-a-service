@@ -5,9 +5,11 @@ resource "azurerm_user_assigned_identity" "runner" {
   resource_group_name = azurerm_resource_group.main.name
 }
 
+data "azurerm_subscription" "current" {}
+
 resource "azurerm_role_assignment" "runner" {
   count                = var.enable_runner ? 1 : 0
-  scope                = data.azurerm_client_config.current.subscription_id
+  scope                = data.azurerm_subscription.current.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.runner[0].principal_id
 }
