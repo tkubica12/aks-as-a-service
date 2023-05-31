@@ -40,8 +40,8 @@ provider "azurerm" {
       purge_soft_delete_on_destroy    = true
       recover_soft_deleted_key_vaults = true
     }
-    use_msi = true
   }
+  use_msi = true
 }
 
 # provider "helm" {
