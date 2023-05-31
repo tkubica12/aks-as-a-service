@@ -23,8 +23,4 @@ jobs:
         sudo apt-get install -y azure-cli
 
     - name: Azure Login
-      uses: azure/login@v1
-      with:
-        client-id: ${{ vars.RUNNER_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      run: az login --identity
