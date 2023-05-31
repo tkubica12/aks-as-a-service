@@ -46,3 +46,12 @@ jobs:
     - name: Deploy landing zone
       working-directory: ./landing_zone
       run: terraform apply -auto-approve -var "github_runner_token=${{ steps.parse_runner_token.outputs.value }}"
+
+    - name: Store runner client ID as repo variable
+      uses: octokit/request-action@v2.x
+      id: store_runner_client_id
+      with:
+        route: GET /repos/tkubica12/aks-as-a-service/actions/variables
+        # body: '{"name": "runner_client_id", "value": "something"}'
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
