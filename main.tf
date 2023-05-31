@@ -23,7 +23,7 @@ module "aks_system" {
   keyvault_private_dns_zone_id = local.manifest.keyvault_private_dns_zone_id
   shared_nodepools             = local.manifest.shared_nodepools
   ingress_types                = local.manifest.ingress_types
-  log_analytics_id_defender    = "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.OperationalInsights/workspaces/iosotmtpdskoidye"
+  log_analytics_id_defender    = "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.OperationalInsights/workspaces/uywlhbbtpobpmjid"
 }
 
 module "aks_apps" {
