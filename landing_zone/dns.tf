@@ -1,5 +1,5 @@
-resource "azurerm_private_dns_zone" "northeurope" {
-  name                = "privatelink.northeurope.azmk8s.io"
+resource "azurerm_private_dns_zone" "aks" {
+  name                = "privatelink.${azurerm_resource_group.main.location}.azmk8s.io"
   resource_group_name = azurerm_resource_group.main.name
 }
 
