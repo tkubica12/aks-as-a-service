@@ -13,7 +13,7 @@ jobs:
       uses: octokit/request-action@v2.x
       id: store_runner_client_id
       with:
-        route: GET /repos/tkubica12/aks-as-a-service/actions/variables
-        # body: '{"name": "runner_client_id", "value": "something"}'
+        route: POST /repos/tkubica12/aks-as-a-service/actions/variables
+        body: '{"name": "runner_client_id", "value": "something"}'
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
