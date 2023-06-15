@@ -14,7 +14,7 @@ cluster_upgrade_channel: patch
 # OS auto-upgrade channel: SecurityPatch, NodeImage, Unmanaged or None -- PLACEHOLDER, wait for azurerm to implement this preview feature
 os_upgrade_channel: SecurityPatch
 # Cluster region
-location: swedencentral
+location: westeurope
 # Cluster resource group
 resource_group_name: aks-as-a-service-cluster01
 # Cluster subscription id
@@ -24,7 +24,7 @@ tenant_id: d6af5f85-2a50-4370-b4b5-9b9a55bcb0dc
 # Resource ID of network subnet for API server (must be delegated)
 api_subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-api
 # Resource ID of private cluster DNS Zone
-cluster_private_dns_zone_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/privateDnsZones/privatelink.swedencentral.azmk8s.io
+cluster_private_dns_zone_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/privateDnsZones/privatelink.westeurope.azmk8s.io
 # Resource ID of private endpoint KeyVault DNS zone
 keyvault_private_dns_zone_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net
 
