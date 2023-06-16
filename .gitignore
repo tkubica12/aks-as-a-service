@@ -33,3 +33,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 .secrets
+clusters/cluster01/.terraform.lock.hcl

@@ -1,0 +1,42 @@
+name: Create cluster01
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    environment: demo
+    permissions:
+      id-token: write
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Install Azure cli
+      run: |
+        sudo apt-get install -y ca-certificates curl apt-transport-https lsb-release gnupg
+        curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+        AZ_REPO=$(lsb_release -cs)
+        echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+        sudo apt-get update
+        sudo apt-get install -y azure-cli
+
+    - name: Azure Login
+      run: az login --identity
+
+    - name: Install dependencies
+      run: sudo apt-get install -y unzip
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
+
+    - name: Terraform Init
+      working-directory: ./clusters/cluster01
+      run: terraform init -upgrade 
+
+    - name: Terraform Plan
+      working-directory: ./clusters/cluster01
+      run: terraform plan
