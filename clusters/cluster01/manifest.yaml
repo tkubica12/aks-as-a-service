@@ -3,7 +3,7 @@
 ## providing single place to define cluster configuration.
 
 # Name of cluster
-cluster_name: cluster01b
+cluster_name: cluster01
 # Cluster Kubernetes version, use short style (eg. 1.24) especially if auto-upgrade is enabled
 # You can also disable auto-upgrade and use explicit long version (eg. 1.24.5)
 cluster_version: 1.24
