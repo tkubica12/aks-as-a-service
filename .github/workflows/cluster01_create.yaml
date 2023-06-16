@@ -52,7 +52,7 @@ jobs:
         done
 
     - run: |
-        ll
+        ls -lah
         git status
 
     - name: Commit and push runtime.yaml
