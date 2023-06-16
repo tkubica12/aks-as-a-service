@@ -45,7 +45,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   network_profile {
     network_policy      = "calico"
     network_plugin      = "azure"
-    network_plugin_mode = "overlay"
+    network_plugin_mode = "Overlay"
     service_cidr        = "192.168.196.0/22"
     dns_service_ip      = "192.168.196.10"
   }
@@ -98,7 +98,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   ]
 
   lifecycle {  
-    ignore_changes = [ network_profile.network_plugin_mode ]  # short term workaround for fix in 3.62.0
+    ignore_changes = [ network_profile[0].network_plugin_mode ]  # short term workaround for fix in 3.62.0
   }
 }
 
