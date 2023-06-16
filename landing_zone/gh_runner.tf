@@ -75,6 +75,15 @@ resource "azurerm_linux_virtual_machine" "runner" {
 locals {
   github_runner_script = <<SCRIPT
 #!/bin/bash
+echo Installing Docker
+apt-get update
+apt-get install -y docker.io
+
+echo Installing kubernetes tools
+snap install kubectl --classic
+snap install helm --classic
+snap install k9s --classic
+
 echo Creating directory
 mkdir actions-runner && cd actions-runner
 

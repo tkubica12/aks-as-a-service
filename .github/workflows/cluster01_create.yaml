@@ -60,9 +60,6 @@ jobs:
         skip_fetch: true
         branch: main
 
-    - name: Install docker
-      run: sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
     - name: Get cluster name
       id: get_cluster_name
       uses: mikefarah/yq@master
