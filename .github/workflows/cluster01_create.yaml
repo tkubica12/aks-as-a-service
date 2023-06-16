@@ -73,13 +73,13 @@ jobs:
       id: get_cluster_name
       uses: mikefarah/yq@master
       with:
-        cmd: yq '.cluster_name' ./clusters/cluster01/runtime.yaml
+        cmd: yq '.cluster_name' ./clusters/cluster01/manifest.yaml
 
     - name: Get cluster RG name
       id: get_cluster_rg_name
       uses: mikefarah/yq@master
       with:
-        cmd: yq '.resource_group_name' ./clusters/cluster01/runtime.yaml
+        cmd: yq '.resource_group_name' ./clusters/cluster01/manifest.yaml
 
     - name: Bootstrap ArgoCD
       working-directory: ./charts/argocd_bootstrap

@@ -12,7 +12,7 @@ resource "azurerm_subnet" "aks_api" {
   address_prefixes     = ["10.0.0.0/28"]
 
   delegation {
-    name = "aks-api"
+    name = "aks-delegation"
 
     service_delegation {
       name    = "Microsoft.ContainerService/managedClusters"
