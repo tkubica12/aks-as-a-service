@@ -96,5 +96,9 @@ resource "azurerm_kubernetes_cluster" "main" {
     azurerm_role_assignment.private_dns_zone,
     azurerm_private_endpoint.keyvault_system
   ]
+
+  lifecycle {  
+    ignore_changes = [ network_profile.network_plugin_mode ]  # short term workaround for fix in 3.62.0
+  }
 }
 
