@@ -51,6 +51,10 @@ jobs:
           retries=$((retries+1))
         done
 
+    - run: |
+        ll
+        git status
+
     - name: Commit and push runtime.yaml
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
