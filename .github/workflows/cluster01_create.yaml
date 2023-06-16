@@ -83,6 +83,8 @@ jobs:
 
     - name: Bootstrap ArgoCD
       working-directory: ./charts/argocd_bootstrap
+      env:
+        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
         az aks command invoke -n ${{ steps.get_cluster_name.outputs.result }} \
           -g ${{ steps.get_cluster_rg_name.outputs.result }}  \
