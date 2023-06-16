@@ -60,6 +60,9 @@ jobs:
         skip_fetch: true
         branch: main
 
+    - name: Install yq
+      uses: chrisdickinson/setup-yq@latest
+
     - name: Bootstrap ArgoCD
       working-directory: ./charts/argocd_bootstrap
       run: |
