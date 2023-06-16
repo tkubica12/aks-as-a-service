@@ -48,10 +48,17 @@ jobs:
           retries=$((retries+1))
         done
 
+    - name: Git Commit runtime.yaml
+      run: |
+        git add ./clusters/cluster01/runtime.yaml
+        git commit -m "Committing runtime.yaml"
+
     - name: Bootstrap ArgoCD
       working-directory: ./charts/argocd_bootstrap
       run: |
-        az aks command invoke -n cluster01 -g cluster01 -f . -c \
+        az aks command invoke -n $(cat runtime.yaml | yq -r '.cluster_name') \
+          -g $(cat runtime.yaml | yq -r '.resource_group_name') \
+          -f . -c \
           "kubectl create namespace argocd; 
           kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml; 
-          helm upgrade -i argocd-bootstrap . --set repo_token=$REPO_TOKEN --set cluster_name=cluster01"
+          helm upgrade -i argocd-bootstrap . --set repo_token=$REPO_TOKEN --set cluster_name=$(cat runtime.yaml | yq -r '.cluster_name')"
