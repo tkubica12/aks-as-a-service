@@ -60,15 +60,24 @@ jobs:
         skip_fetch: true
         branch: main
 
-    - name: Install yq
-      uses: chrisdickinson/setup-yq@latest
+    - name: Get cluster name
+      id: get_cluster_name
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq '.cluster_name' ../../clusters/cluster01/runtime.yaml
+
+    - name: Get cluster RG name
+      id: get_cluster_rg_name
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq '.resource_group_name' ../../clusters/cluster01/runtime.yaml
 
     - name: Bootstrap ArgoCD
       working-directory: ./charts/argocd_bootstrap
       run: |
-        az aks command invoke -n $(cat ../../clusters/cluster01/runtime.yaml | yq '.cluster_name') \
-          -g $(cat ../../clusters/cluster01/runtime.yaml | yq '.resource_group_name') \
+        az aks command invoke -n ${{ steps.get_cluster_name.outputs.result }} \
+          -g ${{ steps.get_cluster_rg_name.outputs.result }}  \
           -f . -c \
           "kubectl create namespace argocd; 
           kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml; 
-          helm upgrade -i argocd-bootstrap . --set repo_token=$REPO_TOKEN --set cluster_name=$(cat ../../clusters/cluster01/runtime.yaml | yq .cluster_name')"
+          helm upgrade -i argocd-bootstrap . --set repo_token=$REPO_TOKEN --set cluster_name=${{ steps.get_cluster_name.outputs.result }}"
