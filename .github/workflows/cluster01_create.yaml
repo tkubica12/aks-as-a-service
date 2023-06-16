@@ -49,9 +49,12 @@ jobs:
         done
 
     - name: Git Commit runtime.yaml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git add ./clusters/cluster01/runtime.yaml
         git commit -m "Committing runtime.yaml"
+        git push origin main
 
     - name: Bootstrap ArgoCD
       working-directory: ./charts/argocd_bootstrap

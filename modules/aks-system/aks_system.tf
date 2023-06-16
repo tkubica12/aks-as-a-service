@@ -45,7 +45,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   network_profile {
     network_policy      = "calico"
     network_plugin      = "azure"
-    network_plugin_mode = "Overlay"
+    network_plugin_mode = "overlay"
     service_cidr        = "192.168.196.0/22"
     dns_service_ip      = "192.168.196.10"
   }
