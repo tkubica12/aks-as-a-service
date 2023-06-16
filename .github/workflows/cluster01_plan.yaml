@@ -1,4 +1,4 @@
-name: Create cluster01
+name: Plan cluster01
 on:
   workflow_dispatch:
 
