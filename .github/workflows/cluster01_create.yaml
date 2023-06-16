@@ -66,9 +66,9 @@ jobs:
     - name: Bootstrap ArgoCD
       working-directory: ./charts/argocd_bootstrap
       run: |
-        az aks command invoke -n $(cat ../../clusters/cluster01/runtime.yaml | yq -r '.cluster_name') \
-          -g $(cat ../../clusters/cluster01/runtime.yaml | yq -r '.resource_group_name') \
+        az aks command invoke -n $(cat ../../clusters/cluster01/runtime.yaml | yq '.cluster_name') \
+          -g $(cat ../../clusters/cluster01/runtime.yaml | yq '.resource_group_name') \
           -f . -c \
           "kubectl create namespace argocd; 
           kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml; 
-          helm upgrade -i argocd-bootstrap . --set repo_token=$REPO_TOKEN --set cluster_name=$(cat ../../clusters/cluster01/runtime.yaml | yq -r '.cluster_name')"
+          helm upgrade -i argocd-bootstrap . --set repo_token=$REPO_TOKEN --set cluster_name=$(cat ../../clusters/cluster01/runtime.yaml | yq .cluster_name')"
