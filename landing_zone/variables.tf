@@ -5,7 +5,7 @@ variable "my_ip" {
 
 variable "enable_jump" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "enable_runner" {
