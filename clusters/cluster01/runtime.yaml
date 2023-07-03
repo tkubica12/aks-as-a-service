@@ -1,43 +1,43 @@
 "application_identities":
   "app101":
-    "client_id": "2b7cecca-8149-44d6-93b9-65a92a860d9c"
+    "client_id": "ff99555a-cca9-421a-a73f-bc86586d3533"
     "id": "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-cluster01/providers/Microsoft.ManagedIdentity/userAssignedIdentities/app101"
     "location": "westeurope"
     "name": "app101"
-    "principal_id": "34e95b67-077c-47b1-a8c0-32b0f84c9f41"
+    "principal_id": "5d02df80-15f8-4a21-8018-21e85f82e0b3"
     "resource_group_name": "aks-as-a-service-cluster01"
     "tags": {}
     "tenant_id": "d6af5f85-2a50-4370-b4b5-9b9a55bcb0dc"
     "timeouts": null
   "app102":
-    "client_id": "7fc48984-22ce-4907-b79d-257e553c4b98"
+    "client_id": "d8743441-f398-4de3-ad76-d81a670fc56e"
     "id": "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-cluster01/providers/Microsoft.ManagedIdentity/userAssignedIdentities/app102"
     "location": "westeurope"
     "name": "app102"
-    "principal_id": "46a3d873-3f2b-4797-9cf9-0a9ee28b9cac"
+    "principal_id": "01c931ad-c16c-4233-97fa-026a86825019"
     "resource_group_name": "aks-as-a-service-cluster01"
     "tags": {}
     "tenant_id": "d6af5f85-2a50-4370-b4b5-9b9a55bcb0dc"
     "timeouts": null
   "app103":
-    "client_id": "ac897f50-feaa-4e3f-968f-22580fbef2c9"
+    "client_id": "c87d2172-a23e-4fbf-afde-0f7632a4aba4"
     "id": "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-cluster01/providers/Microsoft.ManagedIdentity/userAssignedIdentities/app103"
     "location": "westeurope"
     "name": "app103"
-    "principal_id": "f1a8b971-6f6e-4553-aa5f-b4dd087f6122"
+    "principal_id": "3247b78f-025e-43c4-bbb3-6b4b17472bb1"
     "resource_group_name": "aks-as-a-service-cluster01"
     "tags": {}
     "tenant_id": "d6af5f85-2a50-4370-b4b5-9b9a55bcb0dc"
     "timeouts": null
   "app201":
-    "client_id": "4fc5b086-47a5-41c3-89b3-46b58c3687f3"
+    "client_id": "22e604e6-06d8-4980-a75f-c3769abb97ab"
     "id": "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-cluster01/providers/Microsoft.ManagedIdentity/userAssignedIdentities/app201"
     "location": "westeurope"
     "name": "app201"
-    "principal_id": "8352114c-f70f-4948-8391-214baa4d6a52"
+    "principal_id": "d726c296-b052-4a9d-a15c-5be9ff910fc0"
     "resource_group_name": "aks-as-a-service-cluster01"
     "tags": {}
     "tenant_id": "d6af5f85-2a50-4370-b4b5-9b9a55bcb0dc"
     "timeouts": null
-"shared_identity_client_id": "f2be90b4-7577-4c41-9cba-d8c63161054d"
-"shared_keyvault_name": "cluster01b-nshxacks"
+"shared_identity_client_id": "c9fd537a-7efd-4396-96f2-a676cedbf192"
+"shared_keyvault_name": "cluster01-xlyuzdez"
