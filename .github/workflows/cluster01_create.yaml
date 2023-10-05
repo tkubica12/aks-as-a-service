@@ -43,14 +43,7 @@ jobs:
 
     - name: Terraform Apply
       working-directory: ./clusters/cluster01
-      run: |
-        retries=0
-        max_retries=1
-        until terraform apply -auto-approve || [ $retries -eq $max_retries ]; do
-          echo "Terraform apply failed, retrying in 5 seconds..."
-          sleep 5
-          retries=$((retries+1))
-        done
+      run: terraform apply -auto-approve
 
     - name: Commit and push runtime.yaml
       run: |
