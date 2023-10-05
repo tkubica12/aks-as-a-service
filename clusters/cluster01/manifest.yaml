@@ -6,7 +6,7 @@
 cluster_name: cluster01
 # Cluster Kubernetes version, use short style (eg. 1.24) especially if auto-upgrade is enabled
 # You can also disable auto-upgrade and use explicit long version (eg. 1.24.5)
-cluster_version: 1.24
+cluster_version: 1.27
 # Cluster SKU, use Free for development and Standard for production
 cluster_sku: Free
 # Cluster auto-upgrade channel: patch, stable, rapid, node-image or none
@@ -43,8 +43,8 @@ ingress_types:
   # One or more Azure API Management self-hosted gateways with their subnets (can share the same if needed)
   apim:
     apim-internal:
-      api_management_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.ApiManagement/service/jibglvkbggvi
-      api_management_configuration_endpoint: jibglvkbggvi.configuration.azure-api.net
+      api_management_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.ApiManagement/service/xievhicdwxnb
+      api_management_configuration_endpoint: xievhicdwxnb.configuration.azure-api.net
       subnet_id: /subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.Network/virtualNetworks/cluster01/subnets/aks-inbound-internal
       subnet_name: aks-inbound-internal
 
