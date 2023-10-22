@@ -3,6 +3,7 @@ resource "azurerm_virtual_network" "cluster01" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  dns_servers         = [azurerm_private_dns_resolver_inbound_endpoint.main.ip_configurations[0].private_ip_address]
 }
 
 resource "azurerm_subnet" "aks_api" {

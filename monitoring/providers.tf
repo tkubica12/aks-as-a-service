@@ -8,10 +8,6 @@ terraform {
     #   source  = "azure/azapi"
     #   version = "~>1"
     # }
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "~>2"
-    }
     random = {
       source  = "hashicorp/random"
       version = "~>3"
@@ -20,12 +16,16 @@ terraform {
     #   source  = "hashicorp/helm"
     #   version = "~>2"
     # }
+    # local = {
+    #   source  = "hashicorp/local"
+    #   version = "~>2"
+    # }
   }
   backend "azurerm" {
     resource_group_name  = "base"
     storage_account_name = "tkubicastore"
     container_name       = "tfstate"
-    key                  = "aksaas.lz.tfstate"
+    key                  = "aksaas.monitoring.tfstate"
     subscription_id      = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
     # use_oidc             = true
   }
@@ -41,13 +41,6 @@ provider "azurerm" {
       recover_soft_deleted_key_vaults = true
     }
   }
+  # use_msi         = true
+  subscription_id = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
 }
-
-# provider "helm" {
-#   kubernetes {
-#     host                   = azurerm_kubernetes_cluster.main.kube_config.0.host
-#     client_certificate     = base64decode(azurerm_kubernetes_cluster.main.kube_config.0.client_certificate)
-#     client_key             = base64decode(azurerm_kubernetes_cluster.main.kube_config.0.client_key)
-#     cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.main.kube_config.0.cluster_ca_certificate)
-#   }
-# }
