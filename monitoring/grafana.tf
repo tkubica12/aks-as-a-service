@@ -45,3 +45,10 @@ resource "azurerm_role_assignment" "datareaderrole" {
   role_definition_name = "Monitoring Data Reader"
   principal_id         = azurerm_dashboard_grafana.main.identity.0.principal_id
 }
+
+// Give current user access to Grafana as admin
+resource "azurerm_role_assignment" "useradmin" {
+  scope                = azurerm_dashboard_grafana.main.id
+  role_definition_name = "Grafana Admin"
+  principal_id         = data.azurerm_client_config.current.object_id
+}

@@ -24,7 +24,7 @@ module "aks_system" {
   shared_nodepools             = local.manifest.shared_nodepools
   ingress_types                = local.manifest.ingress_types
   log_analytics_id_defender    = "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.OperationalInsights/workspaces/ntculrfixfarlmth"
-  prometheus_dcr_id            = "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-monitoring/providers/Microsoft.Insights/dataCollectionRules/aks-prometheus"
+  prometheus_dce_id            = "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-monitoring/providers/Microsoft.Insights/dataCollectionEndpoints/aks-prometheus"
 }
 
 module "aks_apps" {
