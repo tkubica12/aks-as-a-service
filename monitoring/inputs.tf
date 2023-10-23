@@ -39,3 +39,38 @@ variable "ampls_rg_name" {
 Name of resource group containing AMPLS instance.
 EOF
 }
+
+variable "monitor_dcr_id" {
+  type        = string
+  description = <<EOF
+Azure Monitor Data Collection Rule ID.
+EOF
+}
+
+variable "monitor_subnet_id" {
+  type        = string
+  description = <<EOF
+Subnet ID for Azure Monitor Workspace Private Link.
+EOF
+}
+
+variable "monitor_amw_zone_id" {
+  type        = string
+  description = <<EOF
+ID of Azure Private DNS Zone for Azure Monitor Workspace.
+EOF
+}
+
+variable "grafana_subnet_id" {
+  type        = string
+  description = <<EOF
+Subnet ID for Azure Managed Grafana Private Link.
+EOF
+}
+
+variable "grafana_zone_id" {
+  type        = string
+  description = <<EOF
+ID of Azure Private DNS Zone for Azure Managed Grafana.
+EOF
+}

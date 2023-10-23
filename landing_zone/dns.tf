@@ -7,6 +7,8 @@ locals {
     "privatelink.vaultcore.azure.net",
     "privatelink.agentsvc.azure-automation.net",
     "privatelink.${azurerm_resource_group.main.location}.azmk8s.io",
+    "privatelink.${azurerm_resource_group.main.location}.prometheus.monitor.azure.com",
+    "privatelink.grafana.azure.com"
   ]
 }
 
