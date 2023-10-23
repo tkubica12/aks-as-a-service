@@ -66,6 +66,11 @@ resource "azurerm_kubernetes_cluster" "main" {
     }
   }
 
+  dynamic "monitor_metrics" {
+    for_each = var.prometheus_dcr_id != "" ? [1] : []
+    content {}
+  }
+
   key_management_service { # Etcd encryption at rest (eg. for Kubernetes Secrets)
     key_vault_key_id         = azurerm_key_vault_key.kms.id
     key_vault_network_access = "Private"

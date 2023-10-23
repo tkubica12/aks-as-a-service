@@ -110,3 +110,9 @@ variable "log_analytics_id_defender" {
   type = string
   description = "ID of existing log analytics workspace for Azure Defender for Kubernetes"
 }
+
+variable "prometheus_dcr_id" {
+  type = string
+  description = "Azure Data Collection Rule ID for collecting Prometheus metrics"
+  default = ""
+}
