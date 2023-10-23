@@ -67,7 +67,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   dynamic "monitor_metrics" {
-    for_each = var.prometheus_dcr_id != "" ? [1] : []
+    for_each = var.prometheus_dce_id != "" ? [1] : []
     content {}
   }
 
