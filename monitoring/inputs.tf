@@ -74,3 +74,10 @@ variable "grafana_zone_id" {
 ID of Azure Private DNS Zone for Azure Managed Grafana.
 EOF
 }
+
+variable "grafana_admin_object_id" {
+  type        = string
+  description = <<EOF
+AAD user object ID of Grafana admin user.
+EOF
+}

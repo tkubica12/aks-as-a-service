@@ -50,5 +50,5 @@ resource "azurerm_role_assignment" "datareaderrole" {
 resource "azurerm_role_assignment" "useradmin" {
   scope                = azurerm_dashboard_grafana.main.id
   role_definition_name = "Grafana Admin"
-  principal_id         = data.azurerm_client_config.current.object_id
+  principal_id         = var.grafana_admin_object_id
 }
