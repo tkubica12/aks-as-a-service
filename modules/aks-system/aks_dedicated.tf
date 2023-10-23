@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "dedicated" {
   vnet_subnet_id         = each.value.subnet_id
   enable_auto_scaling    = true
   zones                  = [1, 2, 3]
-  os_sku                 = "CBLMariner"
+  os_sku                 = "AzureLinux"
 
   node_labels = {
     "dedication" = each.key

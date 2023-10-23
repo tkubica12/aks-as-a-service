@@ -18,6 +18,11 @@ variable "enable_vpn" {
   default = false
 }
 
+variable "enable_bastion" {
+  type    = bool
+  default = false
+}
+
 variable "provision_aad" {
   type    = bool
   default = false

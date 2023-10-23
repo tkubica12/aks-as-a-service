@@ -43,3 +43,19 @@ resource "azurerm_subnet" "dns_in" {
     }
   }
 }
+
+resource "azurerm_subnet" "ampls" {
+  name                                      = "ampls"
+  resource_group_name                       = azurerm_resource_group.main.name
+  virtual_network_name                      = azurerm_virtual_network.hub.name
+  address_prefixes                          = ["10.80.4.0/24"]
+  private_endpoint_network_policies_enabled = false
+}
+
+resource "azurerm_subnet" "bastion" {
+  name                                      = "AzureBastionSubnet"
+  resource_group_name                       = azurerm_resource_group.main.name
+  virtual_network_name                      = azurerm_virtual_network.hub.name
+  address_prefixes                          = ["10.80.5.0/24"]
+  private_endpoint_network_policies_enabled = false
+}

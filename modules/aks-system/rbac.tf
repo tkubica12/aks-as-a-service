@@ -96,3 +96,9 @@ resource "azurerm_role_assignment" "subnets" {
   principal_id         = azurerm_user_assigned_identity.aks_cluster.principal_id
 }
 
+// RBAC - cluster identity to have join/action on VNET
+resource "azurerm_role_assignment" "vnet" {
+  scope                = element(split("/subnet", var.cluster_subnet_id), 0)
+  role_definition_name = "Network Contributor"
+  principal_id         = azurerm_user_assigned_identity.aks_cluster.principal_id
+} 

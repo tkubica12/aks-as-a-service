@@ -57,13 +57,18 @@ resource "azurerm_kubernetes_cluster" "main" {
     enable_host_encryption = true # Enable host encryption of temp disk and storage access
     os_disk_type           = "Managed"
     os_disk_size_gb        = 128
-    os_sku                 = "CBLMariner"
+    os_sku                 = "AzureLinux"
     vnet_subnet_id         = var.cluster_subnet_id
     zones                  = [1, 2, 3]
 
     node_labels = {
       "dedication" = "system"
     }
+  }
+
+  dynamic "monitor_metrics" {
+    for_each = var.prometheus_dce_id != "" ? [1] : []
+    content {}
   }
 
   key_management_service { # Etcd encryption at rest (eg. for Kubernetes Secrets)
@@ -93,6 +98,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     azurerm_role_assignment.aks_managed_identity_operator,
     azurerm_role_assignment.aks_cluster_crypto_user,
     azurerm_role_assignment.subnets,
+    azurerm_role_assignment.vnet,
     azurerm_role_assignment.private_dns_zone,
     azurerm_private_endpoint.keyvault_system
   ]
