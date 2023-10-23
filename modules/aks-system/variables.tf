@@ -116,3 +116,9 @@ variable "prometheus_dce_id" {
   description = "Azure Data Collection Endpoint ID for collecting Prometheus metrics"
   default = ""
 }
+
+variable "prometheus_dcr_id" {
+  type = string
+  description = "Azure Data Collection Rule ID for collecting Prometheus metrics"
+  default = ""
+}

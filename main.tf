@@ -25,6 +25,7 @@ module "aks_system" {
   ingress_types                = local.manifest.ingress_types
   log_analytics_id_defender    = "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-lz/providers/Microsoft.OperationalInsights/workspaces/ntculrfixfarlmth"
   prometheus_dce_id            = "/subscriptions/d3b7888f-c26e-4961-a976-ff9d5b31dfd3/resourceGroups/aks-as-a-service-monitoring/providers/Microsoft.Insights/dataCollectionEndpoints/aks-prometheus"
+  prometheus_dcr_id = ""
 }
 
 module "aks_apps" {
