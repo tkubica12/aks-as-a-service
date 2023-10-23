@@ -93,6 +93,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     azurerm_role_assignment.aks_managed_identity_operator,
     azurerm_role_assignment.aks_cluster_crypto_user,
     azurerm_role_assignment.subnets,
+    azurerm_role_assignment.vnet,
     azurerm_role_assignment.private_dns_zone,
     azurerm_private_endpoint.keyvault_system
   ]
