@@ -54,10 +54,3 @@ jobs:
         route: DELETE /repos/tkubica12/aks-as-a-service/actions/runners/${{ steps.parse_runner_id.outputs.value }}
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
-
-    # - name: Delete runner client ID as repo variable
-    #   uses: octokit/request-action@v2.x
-    #   with:
-    #     route: DELETE /repos/tkubica12/aks-as-a-service/actions/variables/runner_client_id
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.PAT }}

@@ -27,7 +27,7 @@ terraform {
     container_name       = "tfstate"
     key                  = "aksaas.monitoring.tfstate"
     subscription_id      = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
-    # use_oidc             = true
+    use_oidc             = true
   }
 }
 
@@ -41,6 +41,5 @@ provider "azurerm" {
       recover_soft_deleted_key_vaults = true
     }
   }
-  # use_msi         = true
   subscription_id = "d3b7888f-c26e-4961-a976-ff9d5b31dfd3"
 }
