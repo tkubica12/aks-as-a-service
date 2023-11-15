@@ -103,8 +103,26 @@ resource "azurerm_kubernetes_cluster" "main" {
     azurerm_private_endpoint.keyvault_system
   ]
 
-  lifecycle {  
-    ignore_changes = [ network_profile[0].network_plugin_mode ]  # short term workaround for fix in 3.62.0
+  lifecycle {
+    ignore_changes = [network_profile[0].network_plugin_mode] # short term workaround for fix in 3.62.0
   }
 }
 
+resource "azapi_update_resource" "costs" {
+  type        = "Microsoft.ContainerService/managedClusters@2023-07-02-preview"
+  resource_id = azurerm_kubernetes_cluster.main.id
+
+  body = jsonencode({
+    properties = {
+      "metricsProfile" : {
+        "costAnalysis" : {
+          "enabled" : true
+        }
+      }
+    }
+  })
+
+  depends_on = [
+    azurerm_kubernetes_cluster.main
+  ]
+}
