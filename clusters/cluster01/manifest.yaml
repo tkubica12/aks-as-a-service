@@ -8,7 +8,7 @@ cluster_name: cluster01
 # You can also disable auto-upgrade and use explicit long version (eg. 1.24.5)
 cluster_version: 1.27
 # Cluster SKU, use Free for development and Standard for production
-cluster_sku: Free
+cluster_sku: Standard
 # Cluster auto-upgrade channel: patch, stable, rapid, node-image or none
 cluster_upgrade_channel: patch
 # OS auto-upgrade channel: SecurityPatch, NodeImage, Unmanaged or None -- PLACEHOLDER, wait for azurerm to implement this preview feature
