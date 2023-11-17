@@ -114,9 +114,9 @@ resource "azapi_update_resource" "costs" {
 
   body = jsonencode({
     properties = {
-      "metricsProfile" : {
-        "costAnalysis" : {
-          "enabled" : true
+      metricsProfile = {
+        costAnalysis = {
+          enabled = true
         }
       }
     }
