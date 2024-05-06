@@ -1,5 +1,5 @@
 resource_group_name     = "aks-as-a-service-monitoring"
-location                = "westeurope"
+location                = "swedencentral"
 monitor_workspace_name  = "aks-monitoring321"
 grafana_name            = "aks-grafana321"
 ampls_name              = "ampls"

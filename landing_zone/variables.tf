@@ -36,5 +36,5 @@ variable "github_runner_token" {
 
 variable "location" {
   type    = string
-  default = "westeurope"
+  default = "swedencentral"
 }
