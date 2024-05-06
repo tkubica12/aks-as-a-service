@@ -6,7 +6,7 @@ resource "azurerm_dashboard_grafana" "main" {
   api_key_enabled                   = true
   deterministic_outbound_ip_enabled = true
   public_network_access_enabled     = false
-  zone_redundancy_enabled           = true
+  zone_redundancy_enabled           = false
 
   azure_monitor_workspace_integrations {
     resource_id = azurerm_monitor_workspace.main.id
